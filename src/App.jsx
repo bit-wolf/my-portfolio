@@ -9,33 +9,80 @@ const stagger = { hidden: { opacity: 0, y: 12 }, visible: (i = 1) => ({ opacity:
 const fadeUp = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
 
 const data = {
-  name: 'Your Name',
-  title: 'Senior Software Engineer • Frontend & Backend',
-  bio: `I build fast, accessible, and delightful web apps. I enjoy crafting pixel-perfect UI, solid architecture, and turning ideas into production.`,
+  name: 'Ashwin Nambiar',
+  title: 'Senior Full Stack Developer',
+  bio: `I specialize in building scalable, high-performance web applications with expertise across frontend, backend, and cloud technologies. I enjoy solving complex problems, mentoring teams, and delivering production-ready solutions.`,
+
   contact: {
-    email: 'you@example.com',
-    linkedin: 'https://linkedin.com/in/yourprofile',
-    github: 'https://github.com/yourprofile'
+    email: 'ashwin.nambiar47@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/ashwinmnambiar/',
+    github: 'https://github.com/bit-wolf'
   },
+
   skills: [
-    { name: 'React', level: 'Expert' },
-    { name: 'Angular', level: 'Advanced' },
+    { name: 'Java', level: 'Advanced' },
     { name: 'Spring Boot', level: 'Advanced' },
-    { name: 'TypeScript', level: 'Advanced' },
+    { name: 'Angular', level: 'Advanced' },
+    { name: 'React', level: 'Advanced' },
+    { name: 'Python', level: 'Advanced' },
+    { name: 'C / C++', level: 'Intermediate' },
+    { name: 'AI / ML (TensorFlow, PyTorch, Keras)', level: 'Intermediate' },
+    { name: 'Playwright & JUnit', level: 'Advanced' },
+    { name: 'SQL / PL-SQL', level: 'Advanced' },
     { name: 'Docker & Kubernetes', level: 'Intermediate' },
-    { name: 'AWS / GCP', level: 'Intermediate' }
+    { name: 'AWS / Jenkins / CI-CD', level: 'Intermediate' }
   ],
+
   certs: [
-    { title: 'AWS Solutions Architect – Associate', issuer: 'Amazon', year: 2024 },
-    { title: 'Oracle Certified Java Programmer', issuer: 'Oracle', year: 2022 },
-    { title: 'React Professional Certification', issuer: 'Frontend Masters', year: 2023 }
+    { title: 'Blockchain Specialization', issuer: 'University of Buffalo', year: 2022 },
+    { title: 'AI/ML Certifications (Intro to Generative AI, LLMs, Responsible AI, Applying AI Principles)', issuer: 'Google Cloud', year: 2023 }
   ],
+
   education: [
-    { school: 'Institute of Tech', degree: 'B.Tech in Computer Science', year: '2016 - 2020' }
+    { school: 'Amrita Vishwa Vidyapeetham, Coimbatore, India', degree: 'B.Tech in Computer Science and Engineering (CGPA: 8.8/10)', year: '2017 - 2021' }
   ],
+
+  experience: [
+    {
+      role: 'Senior Full Stack Developer',
+      company: 'Société Générale, Bangalore',
+      period: 'Sep 2024 - Present',
+      details: [
+        'Led the NRT test suite project for the Starware application using Playwright, improving test automation efficiency.',
+        'Developed JUnit test cases and conducted rigorous release validations, ensuring bug-free software releases.',
+        'Resolved critical production issues under tight deadlines, reducing downtime and enhancing productivity.',
+        'Owned key components, mentored junior developers, and upheld high-quality development standards.'
+      ]
+    },
+    {
+      role: 'Full Stack Developer',
+      company: 'Société Générale, Bangalore',
+      period: 'Jul 2021 - Aug 2024',
+      details: [
+        'Developed and maintained applications using Vue.js, Spring Boot, and Java, optimizing data processes.',
+        'Led migration of Starware from Struts to Angular + Spring Boot, reducing load times and improving scalability.',
+        'Designed and implemented new features, streamlined API documentation with Swagger.',
+        'Managed the full SDLC across multiple projects, ensuring on-time delivery.'
+      ]
+    }
+  ],
+
   projects: [
-    { title: 'Project One', desc: 'A fullstack app with React + Spring Boot. Features realtime updates, auth, and CI/CD.', link: '#' },
-    { title: 'Design System', desc: 'A component library used across multiple products with Storybook and unit tests.', link: '#' }
+    { 
+      title: 'Driver Management System (Deep Learning)', 
+      desc: 'Built a driver management system using object detection (OpenCV + TensorFlow), trained on Google Colab GPUs.', 
+      link: '#' 
+    },
+    { 
+      title: 'Electricity Management using Computer Vision', 
+      desc: 'Developed a working prototype using YOLO for real-time electricity usage detection and optimization.', 
+      link: '#' 
+    },
+    { 
+      title: 'Alphabets Learning App', 
+      desc: 'Full-stack Android application for higher secondary students, providing accessible learning resources.', 
+      link: '#' 
+    }
   ]
 }
 
@@ -84,11 +131,11 @@ export default function App() {
             <div className="mt-8 flex gap-4">
               <div className="p-4 rounded-2xl bg-gradient-to-r from-white via-slate-50 to-white border border-slate-100 shadow-sm">
                 <div className="text-xs text-slate-500">Experience</div>
-                <div className="text-xl font-semibold">5+ yrs</div>
+                <div className="text-xl font-semibold">4+ yrs</div>
               </div>
               <div className="p-4 rounded-2xl bg-gradient-to-r from-white via-slate-50 to-white border border-slate-100 shadow-sm">
                 <div className="text-xs text-slate-500">Open to</div>
-                <div className="text-xl font-semibold">SWE / Frontend</div>
+                <div className="text-xl font-semibold">SDE • Backend / Full-Stack • AI/ML</div>
               </div>
             </div>
           </motion.div>
@@ -98,12 +145,12 @@ export default function App() {
               <div>
                 <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-pink-400 shadow-inner flex items-center justify-center text-white font-bold">YN</div>
                 <h3 className="mt-4 text-xl font-semibold">Featured Highlights</h3>
-                <p className="mt-2 text-sm text-slate-600">Design systems • Scalable Microservices • Frontend performance</p>
+                <p className="mt-2 text-sm text-slate-600">Migration of legacy systems • Automated test frameworks • Scalable microservices • Full-stack development</p>
               </div>
               <div className="flex gap-3 items-center">
                 <div className="flex-1">
                   <div className="text-xs text-slate-500">Latest Project</div>
-                  <div className="font-semibold">Real-time dashboard</div>
+                  <div className="font-semibold">Driver Management System (Deep Learning with OpenCV & TensorFlow)</div>
                 </div>
                 <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center border border-slate-100">⚡</div>
               </div>
@@ -148,7 +195,7 @@ export default function App() {
                   <div className="text-xs text-slate-500">{s.level}</div>
                 </div>
                 <div className="mt-3 h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full transition-all ${s.level === 'Expert' ? 'w-[92%]' : s.level === 'Advanced' ? 'w-[74%]' : 'w-[48%]' } bg-gradient-to-r from-indigo-500 to-pink-500`} />
+                  <div className={`h-full rounded-full transition-all ${s.level === 'Expert' ? 'w-[92%]' : s.level === 'Advanced' ? 'w-[77%]' : 'w-[55%]' } bg-gradient-to-r from-indigo-500 to-pink-500`} />
                 </div>
               </motion.div>
             ))}
