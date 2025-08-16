@@ -1,17 +1,69 @@
-
-
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaEnvelope, FaLinkedin, FaGithub, FaDownload } from 'react-icons/fa'
 
-const stagger = { hidden: { opacity: 0, y: 12 }, visible: (i = 1) => ({ opacity: 1, y: 0, transition: { staggerChildren: 0.04, delayChildren: i * 0.08 } }) }
+const stagger = {
+  hidden: { opacity: 0, y: 12 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.04, delayChildren: i * 0.08 }
+  })
+}
 
-const fadeUp = { hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
+const fadeUp = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+}
+
+// 🔹 Reusable Avatar with image + fallback to initials
+function Avatar({ src, name, size = 'md', className = '' }) {
+  const [error, setError] = useState(false)
+  const initials = useMemo(
+    () =>
+      (name || 'AN')
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(w => w[0])
+        .join('')
+        .toUpperCase(),
+    [name]
+  )
+  const sizeClasses =
+    size === 'sm' ? 'w-10 h-10' : size === 'lg' ? 'w-20 h-20' : 'w-14 h-14'
+
+  if (src && !error) {
+    return (
+      <div className={`${sizeClasses} rounded-full overflow-hidden shadow-lg ${className}`}>
+        <img
+          src={src}
+          alt={name}
+          className="w-full h-full object-cover"
+          onError={() => setError(true)}
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+
+  return (
+    <div
+      className={`${sizeClasses} rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold shadow-lg ${className}`}
+      aria-label={name}
+    >
+      {initials}
+    </div>
+  )
+}
 
 const data = {
   name: 'Ashwin Nambiar',
   title: 'Senior Full Stack Developer',
   bio: `I specialize in building scalable, high-performance web applications with expertise across frontend, backend, and cloud technologies. I enjoy solving complex problems, mentoring teams, and delivering production-ready solutions.`,
+
+  // 🔹 Replace this with your actual image URL
+  profileImage: '/profile.jpeg',
 
   contact: {
     email: 'ashwin.nambiar47@gmail.com',
@@ -68,20 +120,20 @@ const data = {
   ],
 
   projects: [
-    { 
-      title: 'Driver Management System (Deep Learning)', 
-      desc: 'Built a driver management system using object detection (OpenCV + TensorFlow), trained on Google Colab GPUs.', 
-      link: '#' 
+    {
+      title: 'Driver Management System (Deep Learning)',
+      desc: 'Built a driver management system using object detection (OpenCV + TensorFlow), trained on Google Colab GPUs.',
+      link: '#'
     },
-    { 
-      title: 'Electricity Management using Computer Vision', 
-      desc: 'Developed a working prototype using YOLO for real-time electricity usage detection and optimization.', 
-      link: '#' 
+    {
+      title: 'Electricity Management using Computer Vision',
+      desc: 'Developed a working prototype using YOLO for real-time electricity usage detection and optimization.',
+      link: '#'
     },
-    { 
-      title: 'Alphabets Learning App', 
-      desc: 'Full-stack Android application for higher secondary students, providing accessible learning resources.', 
-      link: '#' 
+    {
+      title: 'Alphabets Learning App',
+      desc: 'Full-stack Android application for higher secondary students, providing accessible learning resources.',
+      link: '#'
     }
   ]
 }
@@ -92,7 +144,8 @@ export default function App() {
       <header className="sticky top-0 backdrop-blur-md bg-white/60 border-b border-slate-200 z-40">
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold shadow-lg">YN</div>
+            {/* 🔹 Header avatar with fallback */}
+            <Avatar src={data.profileImage} name={data.name} size="sm" />
             <div className="text-sm font-semibold">{data.name}</div>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
@@ -103,10 +156,12 @@ export default function App() {
             <a href="#contact" className="hover:text-slate-900">Contact</a>
             <a href="#" className="ml-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 text-white text-xs shadow">Resume <FaDownload /></a>
           </nav>
-          <div className="md:hidden">{/* Mobile menu placeholder */}
+          <div className="md:hidden">
             <input id="menu-toggle" className="hidden" type="checkbox" />
             <label htmlFor="menu-toggle" className="cursor-pointer block p-2 rounded-md hover:bg-slate-100">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 6h18M3 12h18M3 18h18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </label>
           </div>
         </div>
@@ -143,7 +198,8 @@ export default function App() {
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="relative">
             <div className="w-full h-80 md:h-96 rounded-2xl bg-gradient-to-br from-indigo-50 to-pink-50 border border-slate-100 shadow-lg p-6 flex flex-col justify-between">
               <div>
-                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-400 to-pink-400 shadow-inner flex items-center justify-center text-white font-bold">YN</div>
+                {/* 🔹 Hero highlights avatar with fallback */}
+                <Avatar src={data.profileImage} name={data.name} size="lg" className="shadow-inner" />
                 <h3 className="mt-4 text-xl font-semibold">Featured Highlights</h3>
                 <p className="mt-2 text-sm text-slate-600">Migration of legacy systems • Automated test frameworks • Scalable microservices • Full-stack development</p>
               </div>
@@ -189,13 +245,24 @@ export default function App() {
           <motion.h2 initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="text-2xl font-bold">Skills</motion.h2>
           <div className="grid sm:grid-cols-3 gap-4">
             {data.skills.map((s, i) => (
-              <motion.div key={s.name} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.06 * i }} className="p-4 rounded-lg bg-white border border-slate-100 shadow-sm">
+              <motion.div
+                key={s.name}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.06 * i }}
+                className="p-4 rounded-lg bg-white border border-slate-100 shadow-sm"
+              >
                 <div className="flex items-center justify-between">
                   <div className="font-semibold">{s.name}</div>
                   <div className="text-xs text-slate-500">{s.level}</div>
                 </div>
                 <div className="mt-3 h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full transition-all ${s.level === 'Expert' ? 'w-[92%]' : s.level === 'Advanced' ? 'w-[77%]' : 'w-[55%]' } bg-gradient-to-r from-indigo-500 to-pink-500`} />
+                  <div
+                    className={`h-full rounded-full transition-all ${
+                      s.level === 'Expert' ? 'w-[92%]' : s.level === 'Advanced' ? 'w-[77%]' : 'w-[55%]'
+                    } bg-gradient-to-r from-indigo-500 to-pink-500`}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -237,7 +304,17 @@ export default function App() {
           <h2 className="text-2xl font-bold">Projects</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {data.projects.map((p, i) => (
-              <motion.a key={p.title} href={p.link} target="_blank" rel="noreferrer" className="group block p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+              <motion.a
+                key={p.title}
+                href={p.link}
+                target="_blank"
+                rel="noreferrer"
+                className="group block p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+              >
                 <div className="flex items-center justify-between">
                   <div className="text-lg font-semibold">{p.title}</div>
                   <div className="text-xs text-slate-400">Project</div>
